@@ -4,6 +4,8 @@ import { Text, Image } from "react-native";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { Asset, useAssets, useFonts } from "expo-asset";
+import { NavigationContainer } from "@react-navigation/native";
+import Tabs from "./navigation/Tabs";
 //if we use useAssets and useFonts hooks, those codes are not needed anymore.
 // const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 // const loadImages = (images) =>
@@ -37,5 +39,9 @@ export default function App() {
       />
     );
   }
-  return <Text>We are done loading!</Text>;
+  return (
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
+  );
 }
