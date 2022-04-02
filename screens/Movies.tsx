@@ -4,7 +4,7 @@ import { Dimensions, FlatList } from "react-native";
 import Swiper from "react-native-swiper";
 import { useQuery, useQueryClient } from "react-query";
 import styled from "styled-components/native";
-import { MovieResponse, moviesApi } from "../api";
+import { moviesApi } from "../api";
 import HList from "../components/HList";
 import HMedia from "../components/HMedia";
 import Loader from "../components/Loader";
@@ -17,17 +17,10 @@ const ListTitle = styled.Text`
   margin-left: 30px;
 `;
 
-const ListContainer = styled.View`
-  margin-bottom: 40px;
-`;
-
 const ComingSoonTitle = styled(ListTitle)`
   margin-bottom: 20px;
 `;
 
-const VSeparator = styled.View`
-  width: 20px;
-`;
 const HSeparator = styled.View`
   height: 20px;
 `;
@@ -37,12 +30,18 @@ const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
   const queryClient = useQueryClient();
   const [refreshing, setRefreshing] = useState(false);
-  const { isLoading: nowPlayingLoading, data: nowPlayingData } =
-    useQuery<MovieResponse>(["movies", "nowPlaying"], moviesApi.nowPlaying);
-  const { isLoading: upcomingLoading, data: upcomingData } =
-    useQuery<MovieResponse>(["movies", "upcoming"], moviesApi.upcoming);
-  const { isLoading: trendingLoading, data: trendingData } =
-    useQuery<MovieResponse>(["movies", "trending"], moviesApi.trending);
+  const { isLoading: nowPlayingLoading, data: nowPlayingData } = useQuery(
+    ["movies", "nowPlaying"],
+    moviesApi.nowPlaying
+  );
+  const { isLoading: upcomingLoading, data: upcomingData } = useQuery(
+    ["movies", "upcoming"],
+    moviesApi.upcoming
+  );
+  const { isLoading: trendingLoading, data: trendingData } = useQuery(
+    ["movies", "trending"],
+    moviesApi.trending
+  );
   const onRefresh = async () => {
     setRefreshing(true);
     await queryClient.refetchQueries(["movies"]);
