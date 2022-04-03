@@ -34,6 +34,7 @@ const VMedia: React.FC<VMediaProps> = ({
   const goToDetail = () => {
     navigation.navigate("Stack", {
       screen: "Detail",
+      //ID를 쿼리로 줘야하기 때문에 반드시 params를 보내야 한다.
       params: {
         ...fullData,
       },
